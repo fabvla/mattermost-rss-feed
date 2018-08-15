@@ -45,6 +45,9 @@ Here's how to start:
         `php feedfetcher.php`  
         You should see your feeds scrolling through. Check your configured Mattermost channel for the new feeds.  
         If everything works fine:
-    9. Add feedfetcher on crontab, once a day. 
+    9. Add feedfetcher on crontab, once a day, ie at 9 am like:
+		`crontab -e` 
+		than add a line like:
+		`0 9 * * * php /opt/applications/mattermost-rss-feed/feedfetcher.php > /opt/applications/mattermost-rss-feed/feedfetcher.log`
 
 
