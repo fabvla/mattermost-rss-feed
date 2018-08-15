@@ -3,7 +3,7 @@
 This integration service posts RSS feeds into specific Mattermost channels by formatting output from html to text
 via [Mattermost's incoming webhooks](https://docs.mattermost.com/developer/webhooks-incoming.html).
 
-<img src="https://pbs.twimg.com/media/CS9EB05UwAANmTh.png" width="800">
+<img src="https://github.com/fabvla/mattermost-rss-feed/blob/master/mattermost-rss-feed.png" width="800">
 
 ## Requirements
 
