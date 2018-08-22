@@ -9,8 +9,8 @@ use ThibaudDauce\Mattermost\Message;
 use ThibaudDauce\Mattermost\Attachment;
 
 $last_run = mktime(0, 0, 0, 1, 1, 1970);
-if( file_exists("last_run") ){
-	$last_run = filemtime("last_run");
+if( file_exists(__DIR__ . '/last_run') ){
+	$last_run = filemtime(__DIR__ . '/last_run');
 }
 
 echo "Fetch RSS $RSS_URL \n";
@@ -48,4 +48,4 @@ foreach ($rss_items as $item) {
 
 echo "New posts added: $new_post_count\n";
 
-touch("last_run");
+touch(__DIR__ . '/last_run');
