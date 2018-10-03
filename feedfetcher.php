@@ -13,37 +13,44 @@ if( file_exists(__DIR__ . '/last_run') ){
 	$last_run = filemtime(__DIR__ . '/last_run');
 }
 
-echo "Fetch RSS $RSS_URL \n";
+foreach($rss_feeds as $rfeed){
 
-$rss = Feed::loadRss($RSS_URL);
+	$RSS_URL = $rfeed['rss_url'];
+	$RSS_IMAGE_URL = $rfeed['rss_image_url'];
 
-$mattermost = new Mattermost(new Client);
+	echo "Fetch RSS $RSS_URL \n";
 
-//reverse items
-$rss_items = array();
-foreach ($rss->item as $item) {
-	$rss_items[] = $item;
-}
-$rss_items = array_reverse($rss_items);
+	$rss = Feed::loadRss($RSS_URL);
 
-//post
-$new_post_count = 0;
-foreach ($rss_items as $item) {
-	
-	if( $item->timestamp > $last_run ) {
-		$message = (new Message)
-			->channel($MATTERMOST_CHANNEL)
-			->username($MATTERMOST_USERNAME)
-			->iconUrl($RSS_IMAGE_URL)
-			->text(''.$item->link);
-		
-		echo "POST $item->title \n";
-		
-		$mattermost->send($message, $MATTERMOST_WEBHOOK);
-		
-		$new_post_count++;
+	$mattermost = new Mattermost(new Client);
+
+	//reverse items
+	$rss_items = array();
+	foreach ($rss->item as $item) {
+		$rss_items[] = $item;
 	}
+	$rss_items = array_reverse($rss_items);
 
+	//post
+	$new_post_count = 0;
+	foreach ($rss_items as $item) {
+		
+		if( $item->timestamp > $last_run ) {
+			$message = (new Message)
+				->channel($MATTERMOST_CHANNEL)
+				->username($MATTERMOST_USERNAME)
+				->iconUrl($RSS_IMAGE_URL)
+				->text(''.$item->link);
+			
+			echo "POST $item->title \n";
+			
+			$mattermost->send($message, $MATTERMOST_WEBHOOK);
+			
+			$new_post_count++;
+		}
+
+	}
+	
 }
 
 echo "New posts added: $new_post_count\n";

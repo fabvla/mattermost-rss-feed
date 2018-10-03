@@ -1,9 +1,19 @@
 <?php 
 
-$RSS_URL = 'https://feed.laravel-news.com/';
-$RSS_IMAGE_URL = 'https://laravel-news.com/favicon-32x32.png';
-
 $MATTERMOST_CHANNEL = 'news';
 $MATTERMOST_USERNAME = 'Rss-Bot';
 $MATTERMOST_WEBHOOK = 'https://mattermost.mysite.com/hooks/abc123';
 
+$rss_feeds = [
+
+	[
+		'rss_url' 		=> 'https://feed.laravel-news.com/',
+		'rss_image_url' => 'https://laravel-news.com/favicon-32x32.png',
+	],
+	
+	[
+		'rss_url' 		=> 'https://laraveldaily.com/feed/',
+		'rss_image_url' => 'https://laravel-news.com/favicon-32x32.png',
+	]
+
+];
